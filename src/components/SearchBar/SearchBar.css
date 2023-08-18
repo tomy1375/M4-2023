@@ -1,0 +1,8 @@
+.search_bar {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  border: 2px solid #0000005c;
+  background-color: #3b3bb3d6;
+
+}
