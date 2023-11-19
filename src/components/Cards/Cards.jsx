@@ -16,7 +16,7 @@ export default function Cards({ characters, onClose }) {
             status={person.status}
             species={person.species}
             gender={person.gender}
-            origin={person.origin}
+            origin={person.origin?.name}
             image={person.image}
             onClose={onClose} // le pasamos la función onClose creada en App.js
           />
