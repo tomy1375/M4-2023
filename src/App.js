@@ -17,34 +17,59 @@ function App() {
 
   const navigate = useNavigate();
   const [access, setAccess] = useState(false);
-  const EMAIL = "tomy_ramos1991@yahoo.com.ar";
-  const PASSWORD = "123456";
+  // const EMAIL = "tomy_ramos1991@yahoo.com.ar";
+  // const PASSWORD = "123456";
 
   const dispatch = useDispatch();
 
-  function login(dataUser) {
-    if (dataUser.password === PASSWORD && dataUser.email === EMAIL) {
-       setAccess(true);
-       navigate('/home');
-    } else {
-      alert("Usuario o clave incorrectos");
+  async function login(userData) {
+    try {
+      const { email, password } = userData;
+      const URL = 'http://localhost:3001/rickandmorty/login/';
+      const {data} = await axios(URL + `?email=${email}&password=${password}`)
+      const {access} = data
+      setAccess(access);
+      access && navigate('/home');
+    } catch (error) {
+      window.alert(error.response.data.response)
     }
+    // axios(URL + `?email=${email}&password=${password}`).then(({ data }) => {
+    //    const { access } = data;
+    //    setAccess(data);
+    //    access && navigate('/home');
+    // });
  }
 
- useEffect(() => {
-  !access && navigate('/');
-}, [access]);
+//   function login(dataUser) {
+//     if (dataUser.password === PASSWORD && dataUser.email === EMAIL) {
+//        setAccess(true);
+//        navigate('/home');
+//     } else {
+//       alert("Usuario o clave incorrectos");
+//     }
+//  }
 
-  function onSearch(id) {
-    axios(`https://rickandmortyapi.com/api/character/${id}`).then(
-      ({ data }) => {
-        if (data.name) {
-          setCharacters((oldChars) => [...oldChars, data]);
-        } else {
-          window.alert("¡No hay personajes con este ID!");
-        }
-      }
-    );
+useEffect(() => {
+  !access && navigate("/");
+}, [access, navigate]);
+
+
+  async function onSearch(id) {
+    try {
+      const{data}= await axios(`http://localhost:3001/rickandmorty/character/${id}`)
+      setCharacters((oldChars) => [...oldChars, data]);
+    } catch (error) {
+      window.alert(error.response.data.message)
+    }
+    // axios(`http://localhost:3001/rickandmorty/character/${id}`).then(
+    //   ({ data }) => {
+    //     if (data.name) {
+    //       setCharacters((oldChars) => [...oldChars, data]);
+    //     } else {
+    //       window.alert("¡No hay personajes con este ID!");
+    //     }
+    //   }
+    // );
   }
 
   function onClose(id) {

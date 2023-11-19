@@ -1,6 +1,7 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
+import './Detail.css'
 
 const Detail = () => {
   // /detail/:id/
@@ -9,7 +10,7 @@ const Detail = () => {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    axios(`https://rickandmortyapi.com/api/character/${id}`).then(
+    axios(`http://localhost:3001/rickandmorty/character/${id}`).then(
       ({ data }) => {
         if (data.name) {
           setCharacter(data);
@@ -25,7 +26,10 @@ const Detail = () => {
   return loading ? (
     <h1>Loading...</h1>
   ) : (
-    <div>
+    <div className="character-card">
+      <div className="back-face">
+      <img src="https://rickandmortyapi.com/api/character/avatar/3.jpeg" alt="" />
+  </div>
       <h2>{character.name}</h2>
       <h2>{character.status}</h2>
       <h2>{character.species}</h2>
@@ -34,6 +38,7 @@ const Detail = () => {
         <h2>{character.origin.name}</h2>
       )}
       <img src={character.image} alt={character.name} />
+      <link rel="stylesheet" href="Detail.css" />
     </div>
   );
 };

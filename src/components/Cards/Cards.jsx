@@ -1,13 +1,13 @@
 import Card from "../Card/Card";
-
+import './Cards.css'
 export default function Cards({ characters, onClose }) {
   // props = { characters }
   //const { characters } = props
   return (
-    <div>
-      {characters.map((person) => {
+    <div className="card">
+      {characters?.map((person) => {
         // person = { id, name, status, gender, origin, image,...}
-        console.log(person.origin);
+        // console.log(person.origin);
         return (
           <Card
             key={person.id}
@@ -16,7 +16,7 @@ export default function Cards({ characters, onClose }) {
             status={person.status}
             species={person.species}
             gender={person.gender}
-            origin={person.origin.name}
+            origin={person.origin}
             image={person.image}
             onClose={onClose} // le pasamos la función onClose creada en App.js
           />

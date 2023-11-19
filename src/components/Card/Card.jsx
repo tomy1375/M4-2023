@@ -31,20 +31,20 @@ export default function Card(props) {
   return (
     <div className="card_content">
       {isFav ? (
-        <button onClick={handleFavorite}>❤️</button>
+        <button onClick={handleFavorite} className="heart-icon favorite">❤️</button>
       ) : (
-        <button onClick={handleFavorite}>🤍</button>
+        <button onClick={handleFavorite} className="heart-icon">🤍</button>
       )}
       {/* ejecutamos la función onClose pasandole como parametro el id del personaje a eliminar */}
-      <button onClick={() => props.onClose(props.id)}>X</button>
       <Link to={`/detail/${props.id}`}>
         <h2>{props.name}</h2>
       </Link>
-      <h2>{props.status}</h2>
+      {/* <h2>{props.status}</h2>
       <h2>{props.species}</h2>
       <h2>{props.gender}</h2>
-      <h2>{props.origin}</h2>
+      <h2>{props.origin}</h2> */}
       <img src={props.image} alt={props.name} />
+      <button onClick={() => props.onClose(props.id)}>X</button>
     </div>
   );
 }

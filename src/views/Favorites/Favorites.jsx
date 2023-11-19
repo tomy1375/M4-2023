@@ -3,6 +3,7 @@ import Card from "../../components/Card/Card";
 import { useDispatch } from "react-redux";
 import { filterCards, orderCards } from "../../redux/actions";
 import { useEffect, useState } from "react";
+
 const Favorites = ({onClose}) => {
   const {myFavorites} = useSelector((state) => state);
   // const myFavorites = useSelector((state) => state.myFavorites);
@@ -18,7 +19,6 @@ const Favorites = ({onClose}) => {
       const filter = event.target.value;
       dispatch(filterCards(filter)) // male o female o ...
   }
-
 
   return (
     <>
@@ -46,7 +46,7 @@ const Favorites = ({onClose}) => {
             status={char.status}
             species={char.species}
             gender={char.gender}
-            origin={char.origin.name}
+            origin={char.origin}
             image={char.image}
             onClose={onClose}
           />
